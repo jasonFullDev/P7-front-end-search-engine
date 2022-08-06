@@ -1,5 +1,7 @@
 import recipes from "../data/recipes.js";
 import CardReccipesFactory from "./Factory/CardReccipesFactory.js";
+import SelectFactory from "./utils/filter.js";
+
 export default class App{
     constructor(){
         this.recipes = recipes
@@ -7,6 +9,10 @@ export default class App{
     displayRecipes(){
         const viewCard =  new CardReccipesFactory()
         viewCard.AllRecipes()
+        viewCard.AllIngredient()
+        const Select = new SelectFactory();
+        Select.initSelectEvent()
+
     }
 }
 

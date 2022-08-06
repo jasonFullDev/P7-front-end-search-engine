@@ -42,3 +42,109 @@ main{
     border-radius: 5px;
 
 }
+
+
+
+
+.filter {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-size: 20px;
+  }
+
+  .filter__label {
+    font-size: 1.125rem;
+  }
+
+  .filter__wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  .filter__wrapper .filter-btn {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+
+  .filter__wrapper .filter-btn:after {
+    content: "";
+    border: solid #FFF;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg) translate3d(-25%, -25%, 0);
+  }
+  .filter__wrapper .filter-btn:hover::after {
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+  }
+
+
+  #filter-list-ingredients{
+    background-color: #3282F7!important;
+  }
+
+  #filter-list-appareils{
+    background-color:  #68D9A4!important;
+  }
+
+  #filter-list-utensiles{
+    background-color:  #ED6454!important;
+  }
+
+
+  
+
+  .filter__wrapper .filter-list {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #901C1C;
+    color: #FFF;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border-radius: 5px;
+    z-index: 100;
+    list-style-type: none;
+    padding-left: 10px;
+  }
+
+  .filter__wrapper .filter-list.open{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 90px;
+    row-gap: 5px;
+  }
+  .filter__wrapper .filter-list.close{
+    display:none;
+}
+  .filter__wrapper .filter-list__item {
+    line-height: 20px;
+    padding: 10px;
+    cursor: pointer;
+    width: 193px;
+  }
+  .filter__wrapper .filter-list__item:hover {
+    list-style: none;
+    background-color: #DB8876;
+    color: black;
+    border-radius: 5px;
+  }
+  .filter__wrapper .filter-list__item:last-child {
+    border-bottom: 0px;
+    list-style: none;
+  }
+  .filter__wrapper.open .filter-btn:after {
+    content: "";
+    border-width: 0 3px 3px 0;
+    border: solid #FFF;
+    padding: 4px;
+    display: inline-block; 
+    transform: rotate(-135deg) translate3d(-10%, -10%, 0);
+  }
+

@@ -24,61 +24,48 @@
         </div>
        <div class="searchTheme container-fluid p-0 mt-5">
             <div id="ingredients" class="mr-5">
-                <button class="btn" id="btn-ingredients">
-                <span id="select-label">Ingredients</span> 
-                <div class="arrow"></div>
-                </button>
-  
-                <div id="dropdown" class="dropdown hidden">
-    
-                <label for="likes" class="select-item">Popularité</label>
-                <input class="option" id="likes" type="radio" name="select" value="Popularité">
-                
-                <label for="date" class="select-item">Date</label>
-                <input class="option" id="date" type="radio" name="select"  value="Date">
-                
-                <label for="title" class="select-item">Titre</label>
-                <input class="option" id="title" type="radio" name="select"  value="Titre">
-                </div>
+                <!-- filter -->
+                <div id="filter-ingredients">
+                  <div class="filter">
+                      <div id="filter-wrapper" class="filter__wrapper">
+                          <button id="btn-ingredients" class="btn filter-btn active" aria-haspopup="listbox"
+                              aria-labelledby="filter-label">Ingredients</button>
+                            <!-- filter ingredients -->
+                            <div id="filter-list-ingredients" class="filter-list" >
+                            </div>
+                      </div>
+                  </div>
+              </div>
             </div>
             
             <div id="appareils" class="mr-5">
-
-            <button class="btn" id="btn-appareils">
-              <span id="select-label">Appareils</span> 
-              <div class="arrow"></div>
-            </button>
-  
-            <div id="dropdown" class="dropdown hidden">
-  
-              <label for="likes" class="select-item">Popularité</label>
-              <input class="option" id="likes" type="radio" name="select" value="Popularité">
-              
-              <label for="date" class="select-item">Date</label>
-              <input class="option" id="date" type="radio" name="select"  value="Date">
-              
-              <label for="title" class="select-item">Titre</label>
-              <input class="option" id="title" type="radio" name="select"  value="Titre">
+              <!-- filter -->
+              <div id="filter-appareils">
+                <div class="filter">
+                    <div id="filter-wrapper" class="filter__wrapper">
+                        <button id="btn-appareils" class="btn filter-btn active" aria-haspopup="listbox"
+                            aria-labelledby="filter-label">Appareils</button>
+                          <!-- filter appareils -->
+                          <div id="filter-list-appareils" class="filter-list" >
+                        
+                          </div>
+                    </div>
+                </div>
             </div>
           </div>
-          <div id="ustensiles" >
-
-            <button class="btn" id="btn-ustensiles">
-              <span id="select-label">Ustensiles</span> 
-              <div class="arrow"></div>
-            </button>
-  
-            <div id="dropdown" class="dropdown hidden">
-  
-              <label for="likes" class="select-item">Popularité</label>
-              <input class="option" id="likes" type="radio" name="select" value="Popularité">
-              
-              <label for="date" class="select-item">Date</label>
-              <input class="option" id="date" type="radio" name="select"  value="Date">
-              
-              <label for="title" class="select-item">Titre</label>
-              <input class="option" id="title" type="radio" name="select"  value="Titre">
-            </div>
+          <div id="ustensiles">
+            <!-- filter -->
+            <div id="filter-ustensiles">
+              <div class="filter">
+                  <div id="filter-wrapper" class="filter__wrapper">
+                      <button id="btn-ustensiles" class="btn filter-btn active" aria-haspopup="listbox"
+                          aria-labelledby="filter-label">Ustensiles</button>
+                         <!-- filter ustensils -->
+                        <div id="filter-list-ustensiles" class="filter-list" >
+                       
+                        </div>
+                  </div>
+              </div>
           </div>
         </div>
     </section>
