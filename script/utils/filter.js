@@ -73,6 +73,33 @@ function SelectFactory(){
        
     }
 
+    
+    function initSearchBar(){
+        this.searchBarBtn.addEventListener('click',()=> {
+            if(this.searchBarInput.value != "")
+            {
+                viewCard.SortBy(this.searchBarInput.value)
+            }
+        })
+
+        this.searchBarInput.addEventListener('change',()=> {
+            if(this.searchBarInput.value == "")
+            {
+                viewCard.SortBy()
+            }
+        })
+
+        this.searchBarInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                if(this.searchBarInput.value != "")
+                {
+                    viewCard.SortBy(this.searchBarInput.value)
+                }
+            }
+        })
+       
+    }
+
     function initSelectEvent(){
          // Ouverture du select
       
