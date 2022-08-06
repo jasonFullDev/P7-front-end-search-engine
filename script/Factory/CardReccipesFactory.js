@@ -1,4 +1,6 @@
 import recipes from '../../data/recipes.js';
+import SelectFactory from "../utils/filter.js";
+
 
 export default class CardReccipesFactory {
     constructor() {
@@ -13,20 +15,28 @@ export default class CardReccipesFactory {
      * affichage des cardRecipes avec leurs informations
      */
     
+    
 
     async SortBy(searchTerm = false){
+
+        const Select = new SelectFactory();
+
+
+     
+
+
+        /* init var and front */
         const max = 30;
         let u = 0;
         let y = 0
         let g = 0;
-    
 
         this.wrapper.innerHTML = ""
         this.ListIngredients.innerHTML = "";
         this.ListAppareils.innerHTML = "";
         this.ListUstensiles.innerHTML = "";
 
-        
+        /* ======================================== */
 
         this.recipesData.forEach(recipe => {
 
@@ -81,7 +91,7 @@ export default class CardReccipesFactory {
                     }
 
                     
-                    /*test de l'ingredients existe déjà */
+                  
 
                     if(this.ListIngredients.children.length == 0)
                     {
@@ -100,6 +110,7 @@ export default class CardReccipesFactory {
                     }
                     else
                     {   
+                        /*test de l'ingredients existe déjà */
                         let result = false;
                         for(let d = 0;d < this.ListIngredients.children.length;d++)
                         {
@@ -253,22 +264,17 @@ export default class CardReccipesFactory {
                                 havebeenadded = true;
                                 // cut the long description after 120 letters
                             }
-                        
                         }
                     }
                     }
                 }
             })
-
-         
-           
-          
-         
-           
-
-
         })
+
+        Select.initSelectEvent()
     }
+
+
 
     async AllRecipes() {
         this.recipesData.forEach(recipe => {

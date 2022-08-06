@@ -48,13 +48,15 @@ function SelectFactory(){
         searchBarBtn.click(); 
     }
 
+    function initFilter(){
+        filterBtnIngredient.addEventListener("click",openSelectFilterIngredient);
+        filterBtnAppareils.addEventListener("click",openSelectFilterAppareils);
+        filterBtnUstensiles.addEventListener("click",openSelectFilterUstensiles);
+    }
+
     function initSelectEvent(){
          // Ouverture du select
-       filterBtnIngredient.addEventListener("click",openSelectFilterIngredient);
-       filterBtnAppareils.addEventListener("click",openSelectFilterAppareils);
-       filterBtnUstensiles.addEventListener("click",openSelectFilterUstensiles);
-
-
+      
        for(let i = 0 ; i < filterIngredient.children.length ;i++)
        {
         filterIngredient.children[i].addEventListener("click",() => { filterevent(filterIngredient.children[i]) });
@@ -70,13 +72,10 @@ function SelectFactory(){
         filterUstensiles.children[i].addEventListener("click",() => { filterevent(filterUstensiles.children[i]) });
        }
 
-     
-    
-
 
 
     }
-    return {initSelectEvent}
+    return {initSelectEvent , initFilter}
 }
 
 export default SelectFactory 

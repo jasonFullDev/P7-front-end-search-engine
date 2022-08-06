@@ -10,9 +10,13 @@ export default class App{
         this.searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
     }
     displayRecipes(){
+        const Select = new SelectFactory();
         const viewCard =  new CardReccipesFactory()
         viewCard.AllRecipes()
         viewCard.SortBy()
+
+        Select.initFilter()
+        Select.initSelectEvent()
 
         this.searchBarBtn.addEventListener('click',()=> {
             if(this.searchBarInput.value != "")
@@ -21,8 +25,8 @@ export default class App{
             }
         })
 
-        const Select = new SelectFactory();
-        Select.initSelectEvent()
+       
+       
 
     }
 }

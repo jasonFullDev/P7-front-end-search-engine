@@ -119,6 +119,9 @@ main{
     grid-template-columns: 1fr 1fr 1fr;
     gap: 90px;
     row-gap: 5px;
+    min-width: 769px;
+    min-height: 71px;
+    padding-top: 14px;
   }
   .filter__wrapper .filter-list.close{
     display:none;
