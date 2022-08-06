@@ -9,8 +9,14 @@ export default class App{
         this.searchBarInput =  searchBar.querySelector('input')
         this.searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
     }
+    displayRecipes(){
+        const Select = new SelectFactory();
+        const viewCard =  new CardReccipesFactory()
+        viewCard.SortBy()
 
-    InitSearchBar(viewCard){
+        Select.initFilter()
+        Select.initSelectEvent()
+
         this.searchBarBtn.addEventListener('click',()=> {
             if(this.searchBarInput.value != "")
             {
@@ -24,35 +30,8 @@ export default class App{
                 viewCard.SortBy()
             }
         })
-
-        this.searchBarInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                if(this.searchBarInput.value != "")
-                {
-                    viewCard.SortBy(this.searchBarInput.value)
-                }
-            }
-        })
        
-    }
-
-
-    displayRecipes(){
-        const Select = new SelectFactory();
-        const viewCard =  new CardReccipesFactory()
-
-        /* Hydrate all recipes */
-        viewCard.SortBy()
-
-        /* create all listener */
-        /* for open dropdown */
-        Select.initFilter()
-
-        /* for all recipes button to filter the recipe by simple click */
-        Select.initSelectEvent()
-
-        /* create listener for the input of the searchBar */
-        InitSearchBar(viewCard) 
+       
 
     }
 }
