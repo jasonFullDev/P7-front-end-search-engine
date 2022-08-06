@@ -28,7 +28,6 @@ export default class App{
             if(this.searchBarInput.value == "")
             {
                 viewCard.SortBy()
-
             }
         })
        

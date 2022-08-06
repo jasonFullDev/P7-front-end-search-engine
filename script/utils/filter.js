@@ -16,37 +16,41 @@ function SelectFactory(){
     const  searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
 
 
-    function openSelectFilterIngredient() {
+    function openSelectFilterIngredient(e) {
 
         if(filterIngredient.children.length > 0)
         {
             filterAppareils.classList.remove("open");
             filterUstensiles.classList.remove("open");
             filterIngredient.classList.toggle("open");
+            e.stopPropagation();// Don't bubble/capture the event any further
         }
        
     }
 
-    function openSelectFilterAppareils(){
+    function openSelectFilterAppareils(e){
         if(filterAppareils.children.length > 0)
         {
             filterIngredient.classList.remove("open");
             filterUstensiles.classList.remove("open");
             filterAppareils.classList.toggle("open");
+            e.stopPropagation();// Don't bubble/capture the event any further
         }
     }
 
-    function openSelectFilterUstensiles() {
+    function openSelectFilterUstensiles(e) {
         if(filterUstensiles.children.length > 0)
         {
             filterIngredient.classList.remove("open");
             filterAppareils.classList.remove("open");
             filterUstensiles.classList.toggle("open");
+            e.stopPropagation();// Don't bubble/capture the event any further
         }
     }
 
     
     function closeSelectFilter() {
+
         filterIngredient.classList.remove("open");
         filterAppareils.classList.remove("open");
         filterUstensiles.classList.remove("open");
@@ -62,9 +66,11 @@ function SelectFactory(){
     }
 
     function initFilter(){
-        filterBtnIngredient.addEventListener("click",openSelectFilterIngredient);
-        filterBtnAppareils.addEventListener("click",openSelectFilterAppareils);
-        filterBtnUstensiles.addEventListener("click",openSelectFilterUstensiles);
+        document.querySelector('html').addEventListener('click',()=> {closeSelectFilter()});
+        filterBtnIngredient.addEventListener("click",(e) => openSelectFilterIngredient(e));
+        filterBtnAppareils.addEventListener("click",(e) =>  openSelectFilterAppareils(e));
+        filterBtnUstensiles.addEventListener("click",(e) =>  openSelectFilterUstensiles(e));
+       
     }
 
     function initSelectEvent(){
