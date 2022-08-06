@@ -25,6 +25,13 @@ export default class App{
             }
         })
 
+        this.searchBarInput.addEventListener('change',()=> {
+            if(this.searchBarInput.value == "")
+            {
+                viewCard.SortBy()
+
+            }
+        })
        
        
 
