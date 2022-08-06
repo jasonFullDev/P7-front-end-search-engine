@@ -42,10 +42,12 @@ function SelectFactory(){
     }
 
 
-    function filterevent(element){
-        element.parentNode.classList.remove("open"); 
+    function filterevent(element,e){
         searchBarInput.value = element.innerHTML; 
         searchBarBtn.click(); 
+        element.parentElement.classList.remove("open"); 
+        e.preventDefault()
+        e.stopPropagation()
     }
 
     function initFilter(){
@@ -59,7 +61,7 @@ function SelectFactory(){
       
        for(let i = 0 ; i < filterIngredient.children.length ;i++)
        {
-        filterIngredient.children[i].addEventListener("click",() => { filterevent(filterIngredient.children[i]) });
+        filterIngredient.children[i].addEventListener("click",() => { filterevent(filterIngredient.children[i],event) });
        }
        
        for(let i = 0 ; i < filterAppareils.children.length ;i++)
