@@ -12,7 +12,6 @@ export default class App{
     displayRecipes(){
         const Select = new SelectFactory();
         const viewCard =  new CardReccipesFactory()
-        viewCard.AllRecipes()
         viewCard.SortBy()
 
         Select.initFilter()

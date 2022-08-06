@@ -17,21 +17,32 @@ function SelectFactory(){
 
 
     function openSelectFilterIngredient() {
-        filterAppareils.classList.remove("open");
-        filterUstensiles.classList.remove("open");
-        filterIngredient.classList.toggle("open");
+
+        if(filterIngredient.children.length > 0)
+        {
+            filterAppareils.classList.remove("open");
+            filterUstensiles.classList.remove("open");
+            filterIngredient.classList.toggle("open");
+        }
+       
     }
 
     function openSelectFilterAppareils(){
-        filterIngredient.classList.remove("open");
-        filterUstensiles.classList.remove("open");
-        filterAppareils.classList.toggle("open");
+        if(filterAppareils.children.length > 0)
+        {
+            filterIngredient.classList.remove("open");
+            filterUstensiles.classList.remove("open");
+            filterAppareils.classList.toggle("open");
+        }
     }
 
     function openSelectFilterUstensiles() {
-        filterIngredient.classList.remove("open");
-        filterAppareils.classList.remove("open");
-        filterUstensiles.classList.toggle("open");
+        if(filterUstensiles.children.length > 0)
+        {
+            filterIngredient.classList.remove("open");
+            filterAppareils.classList.remove("open");
+            filterUstensiles.classList.toggle("open");
+        }
     }
 
     
