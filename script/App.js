@@ -8,6 +8,9 @@ export default class App{
         this.searchBar =document.querySelector('#searchBar')
         this.searchBarInput =  searchBar.querySelector('input')
         this.searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
+        this.searchBarIngredients = document.querySelector('#searchIngredients')
+        this.searchBarAppareils = document.querySelector('#searchAppareils')
+        this.searchBarUstensiles = document.querySelector('#searchUstensiles')
     }
     displayRecipes(){
         const Select = new SelectFactory();
@@ -30,6 +33,29 @@ export default class App{
                 viewCard.SortBy()
             }
         })
+
+        this.searchBarIngredients.addEventListener('change', () => {
+            if(this.searchBarIngredients.value == "")
+            {
+                viewCard.search("Ingredients",this.searchBarIngredients.value)
+            }
+        })
+
+        
+        this.searchBarAppareils.addEventListener('change', () => {
+            if(this.searchBarAppareils.value == "")
+            {
+                viewCard.search("Appareils",this.searchBarAppareils.value)
+            }
+        })
+
+        this.searchBarUstensiles.addEventListener('change', () => {
+            if(this.searchBarUstensiles.value == "")
+            {
+                viewCard.search("Ustensiles",this.searchBarUstensiles.value)
+            }
+        })
+
        
        
 

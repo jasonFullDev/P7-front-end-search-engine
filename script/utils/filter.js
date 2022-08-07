@@ -73,26 +73,33 @@ function SelectFactory(){
        
     }
 
-    function initSelectEvent(){
+    function initSelectEvent(type = false){
          // Ouverture du select
       
-       for(let i = 0 ; i < filterIngredient.children.length ;i++)
+       if(type == false | type == 'Ingredients')
        {
-        filterIngredient.children[i].addEventListener("click",() => { filterevent(filterIngredient.children[i],event) });
+            for(let i = 0 ; i < filterIngredient.children.length ;i++)
+            {
+            filterIngredient.children[i].addEventListener("click",() => { filterevent(filterIngredient.children[i],event) });
+            }
        }
-       
-       for(let i = 0 ; i < filterAppareils.children.length ;i++)
+     
+
+       if(type == false | type == 'Appareils')
        {
-        filterAppareils.children[i].addEventListener("click",() => { filterevent(filterAppareils.children[i]) });
+            for(let i = 0 ; i < filterAppareils.children.length ;i++)
+            {
+            filterAppareils.children[i].addEventListener("click",() => { filterevent(filterAppareils.children[i]) });
+            }
        }
 
-       for(let i = 0 ; i < filterUstensiles.children.length ;i++)
+       if(type == false | type == 'Ustensiles')
        {
-        filterUstensiles.children[i].addEventListener("click",() => { filterevent(filterUstensiles.children[i]) });
+            for(let i = 0 ; i < filterUstensiles.children.length ;i++)
+            {
+            filterUstensiles.children[i].addEventListener("click",() => { filterevent(filterUstensiles.children[i]) });
+            }
        }
-
-
-
     }
     return {initSelectEvent , initFilter}
 }

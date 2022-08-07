@@ -14,9 +14,153 @@ export default class CardReccipesFactory {
      * @param {Arrray} Arrray media of data
      * affichage des cardRecipes avec leurs informations
      */
-    
+
+
+    /*
+        allkey = {{type : "ingredients" , ["coco","lait"] } ,{type : "appareils" , {"drill"}}, type : "Ustensiles" , ["cup"] }}
+
+    */
+
+
+    /* find recipe by tags */
+    async findAllrecipe(tags)
+    {
+
+    }
+
+    /* random tags for help user to choose some without clicking on dropdown (5 max) */
+    async randomPerPick(tags)
+    {
+
+    }
+
+    /* find recipe by searchBar */
+    async findRecipeBy(value)
+    {
+
+    }
+
+    /* func for search a recipe with all tag */ 
+    async determineTheRest(allKey)
+    {
+        
+    }
+
+
+    /* func for search a element in recipe (ingredients etc..) */
+    /* and determine the rest of element (with tag) */
+    /* only for dropdown */
+    async search(type,value)
+    {
+        var allKey = {}
+        var List
+        var u = 0
+        var max = 30
+
+        const Select = new SelectFactory();
+
+        const card = `
+        <article id="card" class="col-lg-3 col-md-6 m-4">
+        
+        <img class="card-img-top" src="./assets/images/img-recipes.jpg" alt="default image" role="image"/>
+        
+        <div class="row infoDescription p-3">
+        
+        <h5 class="col-md-8 title mb-3 d-flex align-items-center">${recipe.name}</h5>
+        
+        <div class="col-md-4 time mb-3 d-flex justify-content-end">
+            <b class="d-flex align-items-center justify-content-between"> 
+                <span><i class="far fa-clock"></i>  ${recipe.time} min</span>
+            </b>
+        </div>
+        
+        <ul class="col-md-6 mb-3" id="ingredients-${recipe.id}">
+        
+        </ul>
+        
+        <p id="description" class="col-md-6">${recipe.description.substring(0,160)+ "..."}</p>
+        
+        </div>
+        
+        </article>`
+
+        this.recipesData.forEach(recipe => {
+            switch(type)
+            {
+                case "Ingredients" : 
+                List = this.ListIngredients
+                recipes.ingredients.forEach(ingredient => {
+                    allKey.push(ingredient)
+                })
+               
+                break;
+                case "Appareils" :
+                List = this.ListAppareils
+                allKey.push(recipes.appliance)
+                break;
+                case "Ustensiles" :
+                List = this.ListUstensiles
+                allKey.push(recipes.ustensils)
+            }
+        })
+
+        var div = document.createElement('div')
+        
+        allKey.forEach(recipe => {
+            recipe.forEach(el => {
+
+                if(u == max)
+                {
+                    return;
+                }
+
+                div = document.createElement('div')
+                div.setAttribute('class','filter-list__item')
+                div.setAttribute('tabindex','0')
+                div.setAttribute('role','button')
+
+                if(el.includes('('))
+                {
+                    div.innerHTML = el.split('(')[0].trim()
+                }
+                else
+                {
+                    div.innerHTML = el.trim()
+                }
+
+                if(List.children.length == 0)
+                {
+                    this.List.append(div)
+                    u++
+                }
+                else
+                {   
+                    /*test de l'ingredients existe déjà */
+                    let result = false
+                    for(let d = 0;d < this.List.children.length;d++)
+                    {
+                        if(this.List.children[d].innerHTML.toLowerCase().trim() == div.innerHTML.toLowerCase().trim())
+                        {
+                            result = true
+                        }
+                    }
+        
+                    if(!result)
+                    {
+                        this.List.append(div)
+                        u++                    
+                    }
+                }
+            })
+        })
+
+        Select.initSelectEvent(type)
+    }
     
 
+    /* general func for sort recipe and searching everythings */
+    /* need to be erased */
+    /* old / deprecated func */
     async SortBy(searchTerm = false){
 
         const Select = new SelectFactory();

@@ -134,7 +134,6 @@ main{
   }
   .filter__wrapper .filter-list__item:hover {
     list-style: none;
-    background-color: #DB8876;
     color: black;
     border-radius: 5px;
   }
