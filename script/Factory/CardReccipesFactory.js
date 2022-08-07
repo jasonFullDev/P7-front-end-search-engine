@@ -173,9 +173,9 @@ export default class CardReccipesFactory {
         let g = 0;
 
         this.wrapper.innerHTML = ""
-        this.ListIngredients.innerHTML = "";
-        this.ListAppareils.innerHTML = "";
-        this.ListUstensiles.innerHTML = "";
+        this.ListIngredients.innerHTML = '<input id="searchIngredients" type="text" placeholder="Rechercher un ingredient">';
+        this.ListAppareils.innerHTML = '<input id="searchAppareils" type="text" placeholder="Rechercher un appareil">';
+        this.ListUstensiles.innerHTML = '<input id="searchUstensiles" type="text" placeholder="Rechercher un ustensile">';
 
         /* ======================================== */
 
