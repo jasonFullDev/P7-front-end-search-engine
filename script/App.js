@@ -15,11 +15,11 @@ export default class App{
     displayRecipes(){
         const Select = new SelectFactory();
         const viewCard =  new CardReccipesFactory()
-        viewCard.SortBy()
+        viewCard.SortByV1()
 
         Select.initFilter()
         Select.initSelectEvent()
-
+       
         this.searchBarBtn.addEventListener('click',()=> {
             if(this.searchBarInput.value != "")
             {
@@ -32,12 +32,20 @@ export default class App{
             {
                 viewCard.SortBy()
             }
+            else
+            {
+                viewCard.SortBy(this.searchBarInput.value)
+            }
         })
 
         this.searchBarIngredients.addEventListener('change', () => {
             if(this.searchBarIngredients.value == "")
             {
-                viewCard.search("Ingredients",this.searchBarIngredients.value)
+                viewCard.SortBy()
+            }
+            else
+            {
+                viewCard.search('Ingredients',this.searchBarInput.value)
             }
         })
 
@@ -45,12 +53,20 @@ export default class App{
         this.searchBarAppareils.addEventListener('change', () => {
             if(this.searchBarAppareils.value == "")
             {
+                viewCard.SortBy()
+            }
+            else
+            {
                 viewCard.search("Appareils",this.searchBarAppareils.value)
             }
         })
 
         this.searchBarUstensiles.addEventListener('change', () => {
             if(this.searchBarUstensiles.value == "")
+            {
+                viewCard.SortBy()
+            }
+            else
             {
                 viewCard.search("Ustensiles",this.searchBarUstensiles.value)
             }

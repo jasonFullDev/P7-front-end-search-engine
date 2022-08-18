@@ -9,82 +9,58 @@ export default class CardReccipesFactory {
         this.ListIngredients = document.getElementById('filter-list-ingredients')
         this.ListAppareils = document.getElementById('filter-list-appareils')
         this.ListUstensiles = document.getElementById('filter-list-ustensiles')
+        this.InputIngredients = document.getElementById('searchIngredients')
+        this.InputAppareils = document.getElementById('searchAppareils')
+        this.InputUstensiles = document.getElementById('searchUstensiles')
+     
+        this.Allkey = document.querySelectorAll('.Keysaved')
     } 
     /**
      * @param {Arrray} Arrray media of data
      * affichage des cardRecipes avec leurs informations
      */
 
-
-    /*
-        allkey = {{type : "ingredients" , ["coco","lait"] } ,{type : "appareils" , {"drill"}}, type : "Ustensiles" , ["cup"] }}
-
-    */
-
-
-    /* find recipe by tags */
-    async findAllrecipe(tags)
-    {
-
-    }
-
-    /* random tags for help user to choose some without clicking on dropdown (5 max) */
-    async randomPerPick(tags)
-    {
-
-    }
-
-    /* find recipe by searchBar */
-    async findRecipeBy(value)
-    {
-
-    }
-
-    /* func for search a recipe with all tag */ 
-    async determineTheRest(allKey)
-    {
-        
-    }
-
-
     /* func for search a element in recipe (ingredients etc..) */
     /* and determine the rest of element (with tag) */
     /* only for dropdown */
-    async search(type,value)
+    async search(type,value,sortType)
     {
-        var allKey = {}
+        var allKey = []
         var List
         var u = 0
         var max = 30
+        
+        this.wrapper.innerHTML = ""
 
         const Select = new SelectFactory();
 
-        const card = `
-        <article id="card" class="col-lg-3 col-md-6 m-4">
-        
-        <img class="card-img-top" src="./assets/images/img-recipes.jpg" alt="default image" role="image"/>
-        
-        <div class="row infoDescription p-3">
-        
-        <h5 class="col-md-8 title mb-3 d-flex align-items-center">${recipe.name}</h5>
-        
-        <div class="col-md-4 time mb-3 d-flex justify-content-end">
-            <b class="d-flex align-items-center justify-content-between"> 
-                <span><i class="far fa-clock"></i>  ${recipe.time} min</span>
-            </b>
-        </div>
-        
-        <ul class="col-md-6 mb-3" id="ingredients-${recipe.id}">
-        
-        </ul>
-        
-        <p id="description" class="col-md-6">${recipe.description.substring(0,160)+ "..."}</p>
-        
-        </div>
-        
-        </article>`
-
         this.recipesData.forEach(recipe => {
+
+            const card = `
+            <article id="card" class="col-lg-3 col-md-6 m-4">
+            
+            <img class="card-img-top" src="./assets/images/img-recipes.jpg" alt="default image" role="image"/>
+            
+            <div class="row infoDescription p-3">
+            
+            <h5 class="col-md-8 title mb-3 d-flex align-items-center">${recipe.name}</h5>
+            
+            <div class="col-md-4 time mb-3 d-flex justify-content-end">
+                <b class="d-flex align-items-center justify-content-between"> 
+                    <span><i class="far fa-clock"></i>  ${recipe.time} min</span>
+                </b>
+            </div>
+            
+            <ul class="col-md-6 mb-3" id="ingredients-${recipe.id}">
+            
+            </ul>
+            
+            <p id="description" class="col-md-6">${recipe.description.substring(0,160)+ "..."}</p>
+            
+            </div>
+            
+            </article>`
+            
             switch(type)
             {
                 case "Ingredients" : 
@@ -92,15 +68,19 @@ export default class CardReccipesFactory {
                 recipes.ingredients.forEach(ingredient => {
                     allKey.push(ingredient)
                 })
-               
+                this.ListIngredients.innerHTML = '<div class="inputGroup"><input id="searchIngredients" class="InputSearchDrop" type="text" placeholder="Rechercher un ingredient"><i class="SearchSVG fa-solid fa-chevron-up"></i></div>';
+          
                 break;
                 case "Appareils" :
                 List = this.ListAppareils
                 allKey.push(recipes.appliance)
+                this.ListAppareils.innerHTML = '<div class="inputGroup"><input id="searchAppareils" class="InputSearchDrop" type="text" placeholder="Rechercher un appareil"><i class="SearchSVG fa-solid fa-chevron-up"></i></div>';
+               
                 break;
                 case "Ustensiles" :
                 List = this.ListUstensiles
                 allKey.push(recipes.ustensils)
+                this.ListUstensiles.innerHTML = '<div class="inputGroup"><input id="searchUstensiles" class="InputSearchDrop" type="text" placeholder="Rechercher un ustensile"><i class="SearchSVG fa-solid fa-chevron-up"></i></div>';
             }
         })
 
@@ -147,6 +127,27 @@ export default class CardReccipesFactory {
         
                     if(!result)
                     {
+                        if(sortType == "recipe")
+                        {
+                            let out = false;
+                            ListAddedRecipes.forEach(rec => {
+                                if(rec == recipe.id)
+                                {
+                                    out = true;
+                                }
+       
+                            })
+    
+                            if(!out)
+                            {
+                                  ListAddedRecipes.push(recipe.id)
+                                  // insert in DOM allCardRecipes
+                                  this.wrapper.insertAdjacentHTML('beforeEnd', card)
+                            }
+                        }
+                      
+               
+                        
                         this.List.append(div)
                         u++                    
                     }
@@ -156,12 +157,17 @@ export default class CardReccipesFactory {
 
         Select.initSelectEvent(type)
     }
-    
 
+
+
+
+    
     /* general func for sort recipe and searching everythings */
     /* need to be erased */
     /* old / deprecated func */
-    async SortBy(searchTerm = false){
+    async SortByV1(searchTerm = false){
+
+
 
         const Select = new SelectFactory();
 
@@ -172,10 +178,13 @@ export default class CardReccipesFactory {
         let y = 0
         let g = 0;
 
+
+      
+
         this.wrapper.innerHTML = ""
-        this.ListIngredients.innerHTML = '<input id="searchIngredients" type="text" placeholder="Rechercher un ingredient">';
-        this.ListAppareils.innerHTML = '<input id="searchAppareils" type="text" placeholder="Rechercher un appareil">';
-        this.ListUstensiles.innerHTML = '<input id="searchUstensiles" type="text" placeholder="Rechercher un ustensile">';
+        this.ListIngredients.innerHTML = '<div class="inputGroup"><input id="searchIngredients" class="InputSearchDrop" type="text" placeholder="Rechercher un ingredient"><i class="SearchSVG fa-solid fa-chevron-up"></i></div>';
+        this.ListAppareils.innerHTML = '<div class="inputGroup"><input id="searchAppareils" class="InputSearchDrop" type="text" placeholder="Rechercher un appareil"><i class="SearchSVG fa-solid fa-chevron-up"></i></div>';
+        this.ListUstensiles.innerHTML = '<div class="inputGroup"><input id="searchUstensiles" class="InputSearchDrop" type="text" placeholder="Rechercher un ustensile"><i class="SearchSVG fa-solid fa-chevron-up"></i></div>';
 
         /* ======================================== */
 
@@ -413,6 +422,28 @@ export default class CardReccipesFactory {
         })
 
         Select.initSelectEvent()
+    }
+
+
+    /* general func for sort recipe and searching everythings */
+    /* need to be erased */
+    /* old / deprecated func */
+    async SortBy(searchTerm = false){
+        
+        const Select = new SelectFactory();
+        if(!searchTerm)
+        {
+            this.search('Ingredients','','recipe')
+            this.search('Appareils','','recipe')
+            this.search('Ustensiles','','recipe')
+            Select.initSelectEvent()
+        }
+        else
+        {
+            /* search for a recipe here */
+            /* in desc , title */
+        }
+       
     }
 
 

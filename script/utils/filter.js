@@ -55,15 +55,68 @@ function SelectFactory(){
         filterAppareils.classList.remove("open");
         filterUstensiles.classList.remove("open");
     }
+      
+    function CreateKey(value,type){
+        let Allkey = document.querySelectorAll('.Keysaved')
+
+        /* Verify not in double */
+
+        let double = false;
+
+        Allkey.forEach(el => {
+            if(el.innerHTML.split('<span')[0].trim() == value.trim())
+            {
+                double = true;
+            }
+        })
+
+        if(double)
+        {
+            return;
+        }
+
+        let keySection = document.querySelector('.KeyWordsSection')
+
+        var color;
+
+        switch(type)
+        {
+            case 'Ingredients':
+                color = '#3282F7';
+                break;
+            case 'Appareils':
+                color = '#68D9A4';
+                break;
+            case 'Ustensiles':
+                color = '#ED6454';
+                break;
+        }
+
+        let div = document.createElement('div')
+        let span = document.createElement('span')
+        div.classList.add('Keysaved')
+        div.setAttribute('style','background-color:'+color+';color:white;')
+
+        div.innerHTML = value;
+        span.setAttribute('class','fa-solid fa-xmark x-mark')
 
 
-    function filterevent(element,e){
-        searchBarInput.value = element.innerHTML; 
-        searchBarBtn.click(); 
-        element.parentElement.classList.remove("open"); 
-        e.preventDefault()
-        e.stopPropagation()
+        
+      
+        div.append(span)
+
+        keySection.append(div)
+
+
+        span.addEventListener('click',() => {
+            div.remove();
+        });
     }
+
+ 
+
+    
+    
 
     function initFilter(){
         document.querySelector('html').addEventListener('click',()=> {closeSelectFilter()});
@@ -80,16 +133,25 @@ function SelectFactory(){
        {
             for(let i = 0 ; i < filterIngredient.children.length ;i++)
             {
-            filterIngredient.children[i].addEventListener("click",() => { filterevent(filterIngredient.children[i],event) });
+                if(!filterIngredient.children[i].classList.contains('inputGroup'))
+                {
+                    let value = filterIngredient.children[i].innerHTML
+                    filterIngredient.children[i].addEventListener("click",() => { CreateKey(value,'Ingredients') });
+                }
+                
             }
        }
      
 
        if(type == false | type == 'Appareils')
        {
-            for(let i = 0 ; i < filterAppareils.children.length ;i++)
+            for(let u = 0 ; u < filterAppareils.children.length ;u++)
             {
-            filterAppareils.children[i].addEventListener("click",() => { filterevent(filterAppareils.children[i]) });
+                if(!filterAppareils.children[u].classList.contains('inputGroup'))
+                {
+                    let value = filterAppareils.children[u].innerHTML 
+                    filterAppareils.children[u].addEventListener("click",() => { CreateKey(value,'Appareils') });   
+                }
             }
        }
 
@@ -97,12 +159,16 @@ function SelectFactory(){
        {
             for(let i = 0 ; i < filterUstensiles.children.length ;i++)
             {
-            filterUstensiles.children[i].addEventListener("click",() => { filterevent(filterUstensiles.children[i]) });
+                if(!filterUstensiles.children[i].classList.contains('inputGroup'))
+                {
+                    filterUstensiles.children[i].addEventListener("click",() => { CreateKey(filterUstensiles.children[i].innerHTML,'Ustensiles') });   
+                }
             }
        }
     }
     return {initSelectEvent , initFilter}
 }
+
 
 export default SelectFactory 
 
