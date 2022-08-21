@@ -6,6 +6,8 @@ function SelectFactory(){
     const filterAppareils = document.querySelector('#filter-list-appareils');
     const filterUstensiles = document.querySelector('#filter-list-ustensiles');
 
+    const filterList = document.querySelector('.filter-list')
+
     const filterBtnIngredient = document.querySelector('#filter-ingredients');
     const filterBtnAppareils = document.querySelector('#filter-appareils');
     const filterBtnUstensiles = document.querySelector('#filter-ustensiles');
@@ -120,10 +122,12 @@ function SelectFactory(){
 
     function initFilter(){
         document.querySelector('html').addEventListener('click',()=> {closeSelectFilter()});
+        filterIngredient.addEventListener('click',(e)=> {e.stopPropagation()});
+        filterAppareils.addEventListener('click',(e)=> {e.stopPropagation()});
+        filterUstensiles.addEventListener('click',(e)=> {e.stopPropagation()});
         filterBtnIngredient.addEventListener("click",(e) => openSelectFilterIngredient(e));
         filterBtnAppareils.addEventListener("click",(e) =>  openSelectFilterAppareils(e));
         filterBtnUstensiles.addEventListener("click",(e) =>  openSelectFilterUstensiles(e));
-       
     }
 
     function initSelectEvent(type = false){

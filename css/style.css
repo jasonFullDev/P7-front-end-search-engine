@@ -127,6 +127,8 @@ main{
     padding-top: 14px;
     grid-template-columns: repeat(3, 1fr);
   }
+
+ 
   .filter__wrapper .filter-list.close{
     display:none;
 }
@@ -155,10 +157,13 @@ main{
   }
 
 
+  .InputSearchDrop{
+    color : white;
+  }
   .inputGroup
   {
       display: inline-block;
-    
+   
       grid-column-start: 1;
       grid-column-end: 4;
       grid-row-start: 1;
