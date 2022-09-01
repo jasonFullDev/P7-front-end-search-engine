@@ -1,64 +1,82 @@
 
 
- 
-function SelectFactory(){
-    const filterIngredient = document.querySelector('#filter-list-ingredients');
-    const filterAppareils = document.querySelector('#filter-list-appareils');
-    const filterUstensiles = document.querySelector('#filter-list-ustensiles');
+ import recipes from '../../data/recipes.js';
 
-    const filterList = document.querySelector('.filter-list')
+export default class filterSelect {
+    constructor() {
+        this.recipesData = recipes
+        this.wrapper = document.getElementById('cardRecipes')
+        this.ListIngredients = document.getElementById('filter-list-ingredients')
+        this.ListAppareils = document.getElementById('filter-list-appareils')
+        this.ListUstensiles = document.getElementById('filter-list-ustensiles')
+        this.InputIngredients = document.getElementById('searchIngredients')
+        this.InputAppareils = document.getElementById('searchAppareils')
+        this.InputUstensiles = document.getElementById('searchUstensiles')
 
-    const filterBtnIngredient = document.querySelector('#filter-ingredients');
-    const filterBtnAppareils = document.querySelector('#filter-appareils');
-    const filterBtnUstensiles = document.querySelector('#filter-ustensiles');
+        this.searchBar =document.querySelector('#searchBar')
     
+     
+        this.Allkey = document.querySelectorAll('.Keysaved')
 
-    const searchBar = document.querySelector('#searchBar')
-    const searchBarInput =  searchBar.querySelector('input')
-    const  searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
+        this.filterIngredient = document.querySelector('#filter-list-ingredients')
+  
+        this.filterAppareils = document.querySelector('#filter-list-appareils')
+        this.filterUstensiles = document.querySelector('#filter-list-ustensiles')
 
+        this.filterList = document.querySelector('.filter-list')
 
-    function openSelectFilterIngredient(e) {
+        this.filterBtnIngredient = document.querySelector('#filter-ingredients');
+        this.filterBtnAppareils = document.querySelector('#filter-appareils');
+        this.filterBtnUstensiles = document.querySelector('#filter-ustensiles');
+        
 
-        if(filterIngredient.children.length > 0)
+        this.searchBar = document.querySelector('#searchBar')
+        this.searchBarInput =  searchBar.querySelector('input')
+        this. searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
+
+    }
+
+    openSelectFilterIngredient(e) {
+
+        if(this.filterIngredient.children.length > 0)
         {
-            filterAppareils.classList.remove("open");
-            filterUstensiles.classList.remove("open");
-            filterIngredient.classList.toggle("open");
+            this.filterUstensiles.classList.remove("open");
+            this.filterAppareils.classList.remove("open");
+            this.filterIngredient.classList.toggle("open");
             e.stopPropagation();// Don't bubble/capture the event any further
         }
        
     }
 
-    function openSelectFilterAppareils(e){
-        if(filterAppareils.children.length > 0)
+    openSelectFilterAppareils(e){
+        if(this.filterAppareils.children.length > 0)
         {
-            filterIngredient.classList.remove("open");
-            filterUstensiles.classList.remove("open");
-            filterAppareils.classList.toggle("open");
+            this.filterIngredient.classList.remove("open");
+            this.filterUstensiles.classList.remove("open");
+            this.filterAppareils.classList.toggle("open");
             e.stopPropagation();// Don't bubble/capture the event any further
         }
     }
 
-    function openSelectFilterUstensiles(e) {
-        if(filterUstensiles.children.length > 0)
+    openSelectFilterUstensiles(e) {
+        if(this.filterUstensiles.children.length > 0)
         {
-            filterIngredient.classList.remove("open");
-            filterAppareils.classList.remove("open");
-            filterUstensiles.classList.toggle("open");
+            this.filterIngredient.classList.remove("open");
+            this.filterAppareils.classList.remove("open");
+            this.filterUstensiles.classList.toggle("open");
             e.stopPropagation();// Don't bubble/capture the event any further
         }
     }
 
     
-    function closeSelectFilter() {
+    closeSelectFilter() {
 
-        filterIngredient.classList.remove("open");
-        filterAppareils.classList.remove("open");
-        filterUstensiles.classList.remove("open");
+        this.filterIngredient.classList.remove("open");
+        this.filterAppareils.classList.remove("open");
+        this.filterAppareils.classList.remove("open");
     }
       
-    function CreateKey(value,type){
+    CreateKey(value,type){
         let Allkey = document.querySelectorAll('.Keysaved')
 
         /* Verify not in double */
@@ -102,45 +120,196 @@ function SelectFactory(){
         div.innerHTML = value;
         span.setAttribute('class','fa-solid fa-xmark x-mark')
 
-
-        
-      
         div.append(span)
 
         keySection.append(div)
-
+     
 
         span.addEventListener('click',() => {
             div.remove();
+            this.TokenSearch();
+           
         });
+
+        this.TokenSearch()
+        
     }
 
  
+    TokenSearch(){
 
+        this.wrapper.innerHTML = '';
+        let Alltoken = document.querySelectorAll('.Keysaved')
+
+        let tokenIngredient = [];
+        let tokenUstensiles = [];
+        let tokenAppareil = [];
+
+        //add on list all token
+        Alltoken.forEach(token => {
+            if(token.style.backgroundColor == "rgb(50, 130, 247)")
+            {
+                tokenIngredient.push(token.innerHTML.split('<')[0])
+            }
+            if(token.style.backgroundColor == "rgb(104, 217, 164)" )
+            {
+                tokenAppareil.push(token.innerHTML.split('<')[0])
+            }
+            if(token.style.backgroundColor == "rgb(237, 100, 84)" )
+            {
+                tokenUstensiles.push(token.innerHTML.split('<')[0])
+            }
+        })
+        
+        //Searching for a recipe that correspond of all token
+        this.recipesData.forEach(recipe => {
+
+            let result = false
+
+            const card = `
+            <article id="card" class="col-lg-3 col-md-6 m-4">
+            
+            <img class="card-img-top" src="./assets/images/img-recipes.jpg" alt="default image" role="image"/>
+            
+            <div class="row infoDescription p-3">
+            
+            <h5 class="col-md-8 title mb-3 d-flex align-items-center">${recipe.name}</h5>
+            
+            <div class="col-md-4 time mb-3 d-flex justify-content-end">
+                <b class="d-flex align-items-center justify-content-between"> 
+                    <span><i class="far fa-clock"></i>  ${recipe.time} min</span>
+                </b>
+            </div>
+            
+            <ul class="col-md-6 mb-3" id="ingredients-${recipe.id}">
+            
+            </ul>
+            
+            <p id="description" class="col-md-6">${recipe.description.substring(0,160)+ "..."}</p>
+            
+            </div>
+            
+            </article>`
+
+            let listofresult = []
+            let Max = tokenIngredient.length
+          
+            if(tokenIngredient.length > 0)
+            {
+                tokenIngredient.forEach(ingredientfromlist => {
+                    recipe.ingredients.forEach((ingredient) => {
+                    
+                        if(ingredient.ingredient.includes(ingredientfromlist))
+                        {
+                            listofresult.push(true)
+                        } 
+                    })
+                })
+                
+                
+                if(listofresult.length == Max)
+                {
+                    result = true
+                }
+
+                if(listofresult.length != Max)
+                {
+                    result = false
+                }
+            }
+
+            if(tokenIngredient.length == 0)
+            {
+                result = true
+            }
+
+            listofresult = []
+            Max = tokenAppareil.length
+
+            if(tokenAppareil.length > 0)
+            {
+             
+                tokenAppareil.forEach(fromlist => {
+                        if(recipe.appliance.includes(fromlist))
+                        {
+                            listofresult.push(true)
+                        } 
+                })
+                
+                  
+                if(listofresult.length == Max && !result)
+                {
+                    result = true
+                }
+
+                if(listofresult.length != Max)
+                {
+                    result = false
+                }
+            }
+
+            if(tokenIngredient.length == 1 && tokenAppareil.length == 1)
+            {
+                result = true
+            }
+
+            listofresult = []
+            Max = tokenAppareil.length
+          
+            if(tokenUstensiles.length > 0)
+            {
+              
+                tokenUstensiles.forEach(fromlist => {
+                    recipe.ustensils.forEach((ustensil) => {
+                    
+                        if(ustensil.includes(fromlist))
+                        {
+                            listofresult.push(true)
+                        } 
+                    })
+                })
+
+                if(listofresult.length == Max && !result)
+                {
+                    result = true
+                }
+           
+                if(listofresult.length-1 != Max)
+                {
+                    result = false
+                }
+            }
+            
+             // insert in DOM allCardRecipes
+            if(result)
+            this.wrapper.insertAdjacentHTML('beforeEnd', card)
+        
+        })
+    }
     
     
 
-    function initFilter(){
-        document.querySelector('html').addEventListener('click',()=> {closeSelectFilter()});
-        filterIngredient.addEventListener('click',(e)=> {e.stopPropagation()});
-        filterAppareils.addEventListener('click',(e)=> {e.stopPropagation()});
-        filterUstensiles.addEventListener('click',(e)=> {e.stopPropagation()});
-        filterBtnIngredient.addEventListener("click",(e) => openSelectFilterIngredient(e));
-        filterBtnAppareils.addEventListener("click",(e) =>  openSelectFilterAppareils(e));
-        filterBtnUstensiles.addEventListener("click",(e) =>  openSelectFilterUstensiles(e));
+    initFilter(){
+        document.querySelector('html').addEventListener('click',()=> {this.closeSelectFilter()});
+        this.filterIngredient.addEventListener('click',(e)=> {e.stopPropagation()});
+        this.filterAppareils.addEventListener('click',(e)=> {e.stopPropagation()});
+        this.filterAppareils.addEventListener('click',(e)=> {e.stopPropagation()});
+        this.filterBtnIngredient.addEventListener("click",(e) => this.openSelectFilterIngredient(e));
+        this.filterBtnAppareils.addEventListener("click",(e) =>  this.openSelectFilterAppareils(e));
+        this.filterBtnUstensiles.addEventListener("click",(e) =>  this.openSelectFilterUstensiles(e));
     }
 
-    function initSelectEvent(type = false){
+    initSelectEvent(type = false){
          // Ouverture du select
       
        if(type == false | type == 'Ingredients')
        {
-            for(let i = 0 ; i < filterIngredient.children.length ;i++)
+            for(let i = 0 ; i < this.filterIngredient.children.length ;i++)
             {
-                if(!filterIngredient.children[i].classList.contains('inputGroup'))
+                if(!this.filterIngredient.children[i].classList.contains('inputGroup'))
                 {
-                    let value = filterIngredient.children[i].innerHTML
-                    filterIngredient.children[i].addEventListener("click",() => { CreateKey(value,'Ingredients') });
+                    let value = this.filterIngredient.children[i].innerHTML
+                    this.filterIngredient.children[i].addEventListener("click",() => { this.CreateKey(value,'Ingredients') });
                 }
                 
             }
@@ -149,32 +318,28 @@ function SelectFactory(){
 
        if(type == false | type == 'Appareils')
        {
-            for(let u = 0 ; u < filterAppareils.children.length ;u++)
+            for(let u = 0 ; u < this.filterAppareils.children.length ;u++)
             {
-                if(!filterAppareils.children[u].classList.contains('inputGroup'))
+                if(!this.filterAppareils.children[u].classList.contains('inputGroup'))
                 {
-                    let value = filterAppareils.children[u].innerHTML 
-                    filterAppareils.children[u].addEventListener("click",() => { CreateKey(value,'Appareils') });   
+                    let value = this.filterAppareils.children[u].innerHTML 
+                    this.filterAppareils.children[u].addEventListener("click",() => { this.CreateKey(value,'Appareils') });   
                 }
             }
        }
 
        if(type == false | type == 'Ustensiles')
        {
-            for(let i = 0 ; i < filterUstensiles.children.length ;i++)
+            for(let i = 0 ; i < this.filterUstensiles.children.length ;i++)
             {
-                if(!filterUstensiles.children[i].classList.contains('inputGroup'))
+                if(!this.filterUstensiles.children[i].classList.contains('inputGroup'))
                 {
-                    filterUstensiles.children[i].addEventListener("click",() => { CreateKey(filterUstensiles.children[i].innerHTML,'Ustensiles') });   
+                    this.filterUstensiles.children[i].addEventListener("click",() => { this.CreateKey(this.filterUstensiles.children[i].innerHTML,'Ustensiles') });   
                 }
             }
        }
     }
-    return {initSelectEvent , initFilter}
+
 }
-
-
-export default SelectFactory 
-
 
 

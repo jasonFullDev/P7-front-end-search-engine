@@ -48,13 +48,12 @@ export default class CardReccipesFactory {
         })
     }
 
+
+
     async AllUstensiles(searchTerm = ""){
         const Select = new SelectFactory();
         const max = 30;
         let u = 0;
-
-
-      
 
 
         let listUstensiles = []
@@ -235,7 +234,7 @@ export default class CardReccipesFactory {
         let searchBarInput =  searchBar.querySelector('input')
         let searchBarBtn = searchBar.querySelector('#searchBar .fa-search')
 
-        this.searchBarBtn.addEventListener('click',()=> {
+        searchBarBtn.addEventListener('click',()=> {
             this.SortBy(this.searchBarInput.value)
        })
     }
