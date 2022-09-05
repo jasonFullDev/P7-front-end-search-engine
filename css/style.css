@@ -17,6 +17,7 @@ header {
     line-height: 47px;
     letter-spacing: 0em;
     text-align: center;
+    display: block;
 }
 header img{
     height: 46px;
@@ -219,4 +220,17 @@ main{
     right: 5px;
     margin-left: 15px;
     width: 11px;
+  }
+
+  #LoginDiv{
+    position: absolute;
+    right: 40px;
+  }
+
+  .LoginSection{
+    text-align: center;
+  }
+
+  .btn-submit{
+    margin-top: 50px;
   }

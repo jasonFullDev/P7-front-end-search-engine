@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/icons/logo.png" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/fontawesome.min.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div id="LoginDiv">
+            <a href="/inscription" class="login">s'inscrire</a>
+        </div>
+        <img src="assets/logo.svg" alt="Logo Les petits plats">
+        <h1 class="titleLogo">Les petits plats</h1>
+    </header>
+ 
+    <section  class="LoginSection">
+        <form id="myform" name="signin" >
+          
+            <div class="formData">
+              <label>E-mail</label><br>
+              <input class="text-control" type="email" id="email" name="email" required /><br>
+              <div id="MailError"     style="display:none;" class="error">Vous devez entrer votre E-mail.</div>
+            </div>
+          
+        
+            <button class="btn-submit" type="submit" class="button" >M'inscrire</button>
+          </form>
+    </section>
+
+
+    <script type="module" src="./script/utils/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
