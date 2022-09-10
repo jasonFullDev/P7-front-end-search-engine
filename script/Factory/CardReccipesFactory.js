@@ -292,8 +292,17 @@ export default class CardReccipesFactory {
             
             </article>`
 
-                  
-     
+
+        // add recipe when the searchTerm is includes in the description
+        if(recipe.description.includes(searchTerm)){
+            if(!havebeenadded)
+            {
+                 // insert in DOM allCardRecipes
+                 this.wrapper.insertAdjacentHTML('beforeEnd', card)
+                 havebeenadded = true;
+            }
+        }
+
         recipe.ingredients.forEach((ingredient) => {
                 
             if(ingredient.ingredient.includes(searchTerm) | searchTerm == false)
